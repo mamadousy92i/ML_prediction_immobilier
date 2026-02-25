@@ -1,12 +1,3 @@
----
-title: Immo Predictor
-emoji: "\U0001F3E0"
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-pinned: false
-license: mit
----
 
 # Immo Predictor API
 
