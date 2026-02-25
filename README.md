@@ -135,7 +135,7 @@ docker run -p 7860:7860 immo-predictor
 
 ## Demo HuggingFace
 
-> _Lien a ajouter apres deploiement._
+[https://lucifer92i-immo-predictor.hf.space/ui/](https://lucifer92i-immo-predictor.hf.space/ui/)
 
 ---
 
