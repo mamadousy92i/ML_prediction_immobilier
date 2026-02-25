@@ -1,0 +1,10 @@
+fastapi>=0.115.0
+uvicorn>=0.30.0
+scikit-learn
+pandas
+numpy
+pydantic>=2.7.0
+python-multipart>=0.0.9
+gradio>=4.0.0
+matplotlib
+
