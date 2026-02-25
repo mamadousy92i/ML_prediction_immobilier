@@ -5,7 +5,7 @@ Pydantic schemas for input validation and output formatting.
 from pydantic import BaseModel, Field
 
 
-# ─── Regression ───────────────────────────────────────────────
+# Regression 
 
 class RegressionInput(BaseModel):
     """Input features for house price prediction (regression)."""
@@ -59,7 +59,7 @@ class RegressionOutput(BaseModel):
     currency: str = Field(default="USD", description="Currency of the predicted price")
 
 
-# ─── Classification ───────────────────────────────────────────
+# Classification 
 
 class ClassificationInput(BaseModel):
     """Input features for building type classification."""

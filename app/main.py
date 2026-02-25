@@ -8,6 +8,7 @@ from contextlib import asynccontextmanager
 import gradio as gr
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 
 from app.predictor import (
     get_store,
@@ -22,7 +23,7 @@ from app.schemas import (
     RegressionOutput,
 )
 
-# ─── Logging ──────────────────────────────────────────────────
+# Logging 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
@@ -30,7 +31,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-# ─── Lifespan (load models once at startup) ───────────────────
+# Lifespan (load models once at startup)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Starting Immo Predictor API...")
@@ -39,7 +40,7 @@ async def lifespan(app: FastAPI):
     logger.info("Shutting down Immo Predictor API.")
 
 
-# ─── App ──────────────────────────────────────────────────────
+# App ────
 app = FastAPI(
     title="Immo Predictor API",
     description=(
@@ -59,23 +60,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ─── Mount Gradio UI at /ui ──────────────────────────────────
+# Mount Gradio UI at /ui
 from app.ui import demo as gradio_demo
 
 app = gr.mount_gradio_app(app, gradio_demo, path="/ui")
 
 
-# ─── Routes ───────────────────────────────────────────────────
+# Routes
 
 
-@app.get("/", tags=["General"], summary="Message de bienvenue")
+@app.get("/", tags=["General"], summary="Redirection vers l'interface")
 def root():
-    """Retourne un message de bienvenue."""
-    return {
-        "message": "Bienvenue sur l'API Immo Predictor",
-        "docs": "/docs",
-        "ui": "/ui",
-    }
+    """Redirige vers l'interface utilisateur Gradio."""
+    return RedirectResponse(url="/ui")
 
 
 @app.get("/health", tags=["General"], summary="Statut de l'API")
@@ -116,7 +113,7 @@ def models_info():
     }
 
 
-# ─── Regression ───────────────────────────────────────────────
+# Regression
 
 
 @app.post(
@@ -151,7 +148,7 @@ def regression_predict(
         raise HTTPException(status_code=500, detail=f"Prediction error: {exc}")
 
 
-# ─── Classification ───────────────────────────────────────────
+# Classification 
 
 
 @app.post(

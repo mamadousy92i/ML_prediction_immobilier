@@ -12,11 +12,11 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-# ─── Paths ────────────────────────────────────────────────────
+# Paths ──
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_PATH = BASE_DIR / "models" / "Mes_models.pkl"
 
-# ─── Global state (loaded once) ──────────────────────────────
+# Global state (loaded once) 
 _store: dict[str, Any] | None = None
 
 
@@ -40,7 +40,7 @@ def get_store() -> dict[str, Any]:
     return _store
 
 
-# ─── Regression ───────────────────────────────────────────────
+# Regression 
 
 # The numerical features expected by the regression pipeline
 _REG_NUM_FEATURES = [
@@ -89,7 +89,7 @@ def predict_regression(data: dict, model_name: str = "random_forest") -> float:
     return float(prediction)
 
 
-# ─── Classification ───────────────────────────────────────────
+# Classification 
 
 _CLF_NUM_FEATURES = [
     "GrLivArea", "TotRmsAbvGrd", "OverallQual", "YearBuilt", "GarageCars",

@@ -18,8 +18,7 @@ logger = logging.getLogger(__name__)
 # Ensure models are loaded
 load_models()
 
-# ─── Neighborhood & HouseStyle lists ─────────────────────────
-
+# Neighborhood & HouseStyle lists 
 NEIGHBORHOODS = [
     "Blmngtn", "Blueste", "BrDale", "BrkSide", "ClearCr",
     "CollgCr", "Crawfor", "Edwards", "Gilbert", "IDOTRR",
@@ -33,7 +32,7 @@ HOUSE_STYLES = [
     "2.5Unf", "SFoyer", "SLvl",
 ]
 
-# ─── Chart helpers ────────────────────────────────────────────
+# Chart helpers ─
 
 def create_regression_comparison_chart(data: dict) -> plt.Figure:
     """Compare predictions from both regression models."""
@@ -132,7 +131,7 @@ def create_classification_comparison_chart(data: dict) -> plt.Figure:
     return fig
 
 
-# ─── Regression Prediction ────────────────────────────────────
+# Regression Prediction
 
 def regression_ui(
     GrLivArea, TotalBsmtSF, LotArea, BedroomAbvGr, FullBath,
@@ -168,8 +167,7 @@ def regression_ui(
         return f"Erreur : {str(e)}", None, None
 
 
-# ─── Classification Prediction ────────────────────────────────
-
+# Classification Prediction 
 def classification_ui(
     GrLivArea, TotRmsAbvGrd, OverallQual, YearBuilt,
     GarageCars, Neighborhood, HouseStyle, model_name
@@ -195,8 +193,7 @@ def classification_ui(
         return f"Erreur : {str(e)}", None, None
 
 
-# ─── Build Gradio Interface ──────────────────────────────────
-
+# Build Gradio Interface 
 CUSTOM_CSS = """
 .gradio-container > footer {
     position: fixed !important;
