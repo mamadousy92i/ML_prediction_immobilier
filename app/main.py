@@ -99,7 +99,25 @@ def models_info():
         raise HTTPException(status_code=503, detail="Models not loaded yet.")
 
     def _model_meta(m):
-        return {"type": type(m).__name__, "params": getattr(m, "get_params", lambda: {})()}
+        # Handle GridSearchCV separately as it contains non-serializable estimators in params
+        if hasattr(m, "best_estimator_"):
+            return {
+                "type": f"GridSearchCV[{type(m.best_estimator_).__name__}]",
+                "best_params": m.best_params_,
+            }
+
+        # For other models, try to get params but keep only serializable types
+        full_params = getattr(m, "get_params", lambda: {})()
+        serializable_params = {}
+        for k, v in full_params.items():
+            if isinstance(v, (str, int, float, bool, list, dict)) or v is None:
+                serializable_params[k] = v
+            # Ignore or stringify more complex objects if needed
+        
+        return {
+            "type": type(m).__name__,
+            "params": serializable_params
+        }
 
     return {
         "regression": {
