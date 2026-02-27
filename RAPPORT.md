@@ -23,14 +23,14 @@ L'objectif final est de deployer ces modeles sous forme d'une **API REST** (Fast
 
 ### 2.1 Chargement et selection des variables
 
-Le dataset provient de Kaggle (*House Prices Dataset*) et se compose de deux fichiers :
-- **Train.csv** : 1460 observations avec 81 variables, incluant la variable cible (`SalePrice`). C'est ce fichier qui a ete utilise pour l'entrainement et l'evaluation des modeles.
-- **Test.csv** : 1459 observations sans la variable cible. Seule une **exploration des donnees (EDA)** a ete realisee sur ce fichier (analyse des distributions, valeurs manquantes, etc.).
+Le dataset provient de Kaggle (*House Prices Dataset*) et contient 1460 observations avec 81 variables, incluant la variable cible (`SalePrice`). Ce fichier a ete utilise pour l'exploration, l'entrainement et l'evaluation des modeles.
 
 Apres analyse de la pertinence des features sur le jeu Train, deux sous-ensembles ont ete selectionnes :
 
 - **Pour la regression** (15 variables) : GrLivArea, TotalBsmtSF, LotArea, BedroomAbvGr, FullBath, TotRmsAbvGrd, OverallQual, OverallCond, YearBuilt, YearRemodAdd, Neighborhood, GarageCars, GarageArea, PoolArea, Fireplaces
 - **Pour la classification** (7 variables) : GrLivArea, TotRmsAbvGrd, OverallQual, YearBuilt, GarageCars, Neighborhood, HouseStyle
+
+Afin de disposer d'un jeu d'entrainement et d'un jeu de test avec les labels reels pour calculer les metriques d'evaluation, un `train_test_split` (70/30) a ete realise sur l'ensemble des donnees disponibles.
 
 ### 2.2 Exploration des donnees (EDA)
 
